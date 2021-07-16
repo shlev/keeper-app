@@ -9,6 +9,7 @@ function CreateArea(props) {
 
     const [newNote, setNewNote] = useState(initNote());
 
+    const [isExpanded, setIsExpanded] = useState(false);
     function initNote() {
       const uuid = uuidv4();
       return {
@@ -24,25 +25,27 @@ function CreateArea(props) {
         console.log("CreateArea handleAddClick")
         props.onAdd(newNote);
         setNewNote(initNote())
+        setIsExpanded(false)
         event.preventDefault();
     }
     return (
       <div>
         <form className="create-note">
-          <input
+          { isExpanded && <input
             name="title"
             onChange={handleChange}
             placeholder="Title"
             value={newNote.title}
-          />
+          />}
           <textarea
             name="content"
             onChange={handleChange}
+            onClick={()=> setIsExpanded(true)}
             placeholder="Take a note..."
             value={newNote.content}
-            rows="3"
+            rows={ isExpanded ? 3 : 1}
           />
-          <Zoom in={true}>
+          <Zoom in={isExpanded}>
             <Fab onClick={handleAddClick}>
               <AddIcon />
             </Fab>
