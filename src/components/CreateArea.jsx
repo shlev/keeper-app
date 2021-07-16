@@ -1,9 +1,17 @@
 import React, { useState} from 'react';
+import {v4 as uuidv4} from 'uuid'
+
 
 function CreateArea(props) {
 
-    const [newNote, setNewNote] = useState({ title: '', content: '' });
+    const [newNote, setNewNote] = useState(initNote());
 
+    function initNote() {
+      const uuid = uuidv4();
+      return {
+         title: '', content: '', uuid: uuid
+      }
+    }
     function handleChange(event) {
         const name = event.target.name;
         const value = event.target.value;
@@ -15,7 +23,7 @@ function CreateArea(props) {
     function handleAddClick( event) {
         console.log("CreateArea handleAddClick")
         props.addNewNote(newNote);
-        setNewNote({title: '', content: ''})
+        setNewNote(initNote())
         event.preventDefault();
     }
     return (

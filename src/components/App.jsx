@@ -22,7 +22,7 @@ function App() {
             <CreateArea addNewNote = {addNote}/>
             {notes.map(note=>
              <Note 
-             key={note.key}
+             key={note.uuid}
              title = {note.title}
              content = {note.content}    
              />)}
