@@ -12,17 +12,14 @@ function CreateArea(props) {
          title: '', content: '', uuid: uuid
       }
     }
-    function handleChange(event) {
-        const name = event.target.name;
-        const value = event.target.value;
-        const updatedNote = { ...newNote, [name]:value};
-        setNewNote(updatedNote);
-
+    function handleChange(event) { 
+      const {name, value} = event.target;
+      setNewNote({ ...newNote, [name]:value});
     }
 
     function handleAddClick( event) {
         console.log("CreateArea handleAddClick")
-        props.addNewNote(newNote);
+        props.onAdd(newNote);
         setNewNote(initNote())
         event.preventDefault();
     }

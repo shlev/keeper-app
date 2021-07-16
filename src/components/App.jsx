@@ -2,7 +2,6 @@ import React, { useState} from 'react'
 import Header from './Header';
 import Footer from './Footer';
 import Note from './Note';
-import notes from '../notes';
 import CreateArea from './CreateArea';
 
 function App() {
@@ -10,31 +9,25 @@ function App() {
     const [notes, setNotes] = useState([]);
 
     function addNote(newNote) {
-        console.log("App Add Note")
-        console.log("New Note -> " + newNote);
-        setNotes(function(prevNotes) { return  [...notes, newNote]} )
-        console.log(notes);
+        setNotes(prevNotes => [...notes, newNote] );
     }
 
-    function deleteNoteByUuid(uuid) {
-      setNotes(function (prevNotes) {
-        return prevNotes.filter((note) => note.uuid != uuid);
-      });
+    function deleteNote(uuid) {
+      setNotes(prevNotesc => prevNotes.filter((note) => note.uuid != uuid));
     }
     
     return (
         <div>
-            <Header />
-            <CreateArea addNewNote = {addNote}/>
+            <Header /> 
+            <CreateArea onAdd = {addNote}/>
             {notes.map(note=>
              <Note 
              key={note.uuid}
              id = {note.uuid}
              title = {note.title}
              content = {note.content}
-             deleteNote = {deleteNoteByUuid}
+             onDelete = {deleteNote}
              />)}
-             {/* <Note key={1} title="Note Title" content="Note Content" /> */}
             <Footer />
         </div>
     );
