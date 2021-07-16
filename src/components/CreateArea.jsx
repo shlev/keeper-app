@@ -1,5 +1,8 @@
 import React, { useState} from 'react';
-import {v4 as uuidv4} from 'uuid'
+import {v4 as uuidv4} from 'uuid';
+import AddIcon from '@material-ui/icons/Add';
+import Fab from '@material-ui/core/Fab';
+import Zoom from '@material-ui/core/Zoom';
 
 
 function CreateArea(props) {
@@ -25,10 +28,25 @@ function CreateArea(props) {
     }
     return (
       <div>
-        <form>
-          <input name="title" onChange={handleChange} placeholder="Title" value={newNote.title}/>
-          <textarea name="content" onChange={handleChange} placeholder="Take a note..."  value={newNote.content} rows="3" />
-          <button onClick={handleAddClick}>Add</button>
+        <form className="create-note">
+          <input
+            name="title"
+            onChange={handleChange}
+            placeholder="Title"
+            value={newNote.title}
+          />
+          <textarea
+            name="content"
+            onChange={handleChange}
+            placeholder="Take a note..."
+            value={newNote.content}
+            rows="3"
+          />
+          <Zoom in={true}>
+            <Fab onClick={handleAddClick}>
+              <AddIcon />
+            </Fab>
+          </Zoom>
         </form>
       </div>
     );

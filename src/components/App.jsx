@@ -13,7 +13,7 @@ function App() {
     }
 
     function deleteNote(uuid) {
-      setNotes(prevNotesc => prevNotes.filter((note) => note.uuid != uuid));
+      setNotes(prevNotes => prevNotes.filter((note) => note.uuid != uuid));
     }
     
     return (
