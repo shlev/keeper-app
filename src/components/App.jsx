@@ -15,6 +15,12 @@ function App() {
         setNotes(function(prevNotes) { return  [...notes, newNote]} )
         console.log(notes);
     }
+
+    function deleteNoteByUuid(uuid) {
+      setNotes(function (prevNotes) {
+        return prevNotes.filter((note) => note.uuid != uuid);
+      });
+    }
     
     return (
         <div>
@@ -23,8 +29,10 @@ function App() {
             {notes.map(note=>
              <Note 
              key={note.uuid}
+             id = {note.uuid}
              title = {note.title}
-             content = {note.content}    
+             content = {note.content}
+             deleteNote = {deleteNoteByUuid}
              />)}
              {/* <Note key={1} title="Note Title" content="Note Content" /> */}
             <Footer />
